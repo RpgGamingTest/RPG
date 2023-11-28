@@ -11,6 +11,8 @@ public class TrabalhoRPG {
         Scanner ler = new Scanner(System.in);
         ArrayList<ArrayList<Criar>> perso = new ArrayList();
         System.out.println("Olá! Seja bem vindo ao jogo de RPG");
+        EXP_Batalha b = new EXP_Batalha();
+        b.batalha();
         perso.add(new ArrayList());
         pr = 0;
         perso = CiarPersonagem(pr, perso);
