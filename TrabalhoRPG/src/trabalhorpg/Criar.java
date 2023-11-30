@@ -8,7 +8,7 @@ public abstract class Criar {
 
     protected String nomePer, descPer, tipo, nomeHab, descHab, NomeArm, MaxF = "", MaxV = "", MaxD = "", MaxP = "";
     protected int Forc = 1, Vit = 1, Dest = 1, Pod = 1, pontos = 6, dano, peso, def, podMin, lvl = 0, lvl2 = 0, resp,
-            limF, limV, limD, limP, iddPer;
+            limF, limV, limD, limP, iddPer, idArm;
     protected String classe;
     protected Scanner l = new Scanner(System.in);
     protected boolean primaria;
@@ -188,7 +188,7 @@ public abstract class Criar {
         }
     }
 
-    public static Arma Pergunta(String tipo, boolean primaria) {
+    public static Arma Pergunta(String tipo, boolean primaria, int id) {
         int dano, peso, def = 0;
         String NomeArm;
         Scanner r = new Scanner(System.in);
@@ -197,8 +197,10 @@ public abstract class Criar {
             dano = r.nextInt();
             if (dano < 1) {
                 System.out.println("Sua arma deve conter dano MAIOR que 0. Digite novamente!");
+            } else if(dano > 100){
+                System.out.println("Sua arma deve conter um dano MENOR que 100. Digite novamente!");
             }
-        } while (dano < 1);
+        } while (dano < 1 || dano > 100);
         System.out.println("Qual é o peso que o(a) " + tipo + " tem?");
         do {
             peso = r.nextInt();
@@ -210,7 +212,7 @@ public abstract class Criar {
         r.nextLine();
         NomeArm = r.nextLine();
         NomeArm = NomeArm.toUpperCase();
-        Arma a = new Arma(dano, peso, def, primaria, tipo, NomeArm);
+        Arma a = new Arma(dano, peso, def, primaria, tipo, NomeArm, id);
         return a;
     }
 

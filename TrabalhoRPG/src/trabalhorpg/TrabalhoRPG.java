@@ -72,7 +72,7 @@ public class TrabalhoRPG {
                     if (perso.get(per).get(3).getDano() > 0 || perso.get(per).get(3).getDefesa() > 0) {
                         System.out.println("O personagem já possui uma ARMA secundária!");
                     } else {
-                        Arma a = new Arma(0, 0, 0, false, null, null);
+                        Arma a = new Arma(0, 0, 0, false, null, null, 0);
                         try {
                             perso.get(per).remove(3);
                             perso.get(per).add(a.CriarArm(false));
@@ -102,7 +102,7 @@ public class TrabalhoRPG {
 
     public static ArrayList<ArrayList<Criar>> CiarPersonagem(int p, ArrayList<ArrayList<Criar>> perso) {
         Scanner ler = new Scanner(System.in);
-        Arma c = new Arma(0, 0, 0, false, null, null);
+        Arma c = new Arma(0, 0, 0, false, null, null,0);
         int resp, idClasse = 0, lvl = 0, idd;
         String NomeP = "", classe = "", nomeH, descH, descPer;
 
@@ -179,7 +179,7 @@ public class TrabalhoRPG {
                 break;
             case 2:
                 nomeH = "TIRO PRECISO";
-                descH = "Ao ser ativada, o DANO da sua ARMA aumenta em 5 pontos"
+                descH = "Ao ser ativada, você acertará seu inimigo com dano crítico!"
                         + "\n| (apenas para armas de longa distância)";
 
                 System.out.println("| Nome da Habilidade: " + nomeH + "\n| Descrição da Habilidade: " + descH);
@@ -188,7 +188,7 @@ public class TrabalhoRPG {
                 break;
             case 3:
                 nomeH = "BOLA DE FOGO";
-                descH = "Ao ser ativada, dispara uma BOLA DE FOGO \n| no inimigo causando 3 de DANO em cada turno";
+                descH = "Ao ser ativada, dispara uma BOLA DE FOGO \n| no inimigo causando 15 de DANO e podendo deixar queimando por 3 turnos";
 
                 System.out.println("| Nome da Habilidade: " + nomeH + "\n| Descrição da Habilidade: " + descH);
                 Habilidades_especiais h3 = new Habilidades_especiais(nomeH, descH, 3, idClasse);
@@ -201,7 +201,7 @@ public class TrabalhoRPG {
         // posição arma --> 0:2
         System.out.println("Agora iremos escolher seu armamento!");
         perso.get(p).add(c.CriarArm(true));
-        Arma Arm = new Arma(0, 0, 0, false, null, null);
+        Arma Arm = new Arma(0, 0, 0, false, null, null, 0);
         perso.get(p).add(Arm);
         return perso;
     }
