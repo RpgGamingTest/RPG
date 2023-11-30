@@ -96,6 +96,11 @@ public abstract class Criar {
         this.classe = classe;
     }
 
+    public int getIdArm() {
+        return idArm;
+    }
+    
+
     public void PreencherAtributos(ArrayList<ArrayList<Criar>> perso, int p) {
         int resp = 0, resp2 = 0;
         if (lvl2 != perso.get(p).get(0).getLvl()) {
