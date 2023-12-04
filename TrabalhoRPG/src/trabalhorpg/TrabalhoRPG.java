@@ -7,7 +7,7 @@ public class TrabalhoRPG {
     // ArrayList<ArrayList<Criar>> pm = new ArrayList();
 
     public static void main(String[] args) {
-        int pr, resp, respM = 0;
+        int pr, resp, respM = 0, per = 0;
         Scanner ler = new Scanner(System.in);
         ArrayList<ArrayList<Criar>> perso = new ArrayList();
         System.out.println("Olá! Seja bem vindo ao jogo de RPG");
@@ -25,10 +25,10 @@ public class TrabalhoRPG {
             System.out.println("+=======================================+");
             do {
                 respM = ler.nextInt();
-                if (respM > 5 || respM < 1) {
+                if (respM > 6 || respM < 1) {
                     System.out.println("Valor inválido! Digite novamente.");
                 }
-            } while (respM > 5 || respM < 1);
+            } while (respM > 6 || respM < 1);
             switch (respM) {
                 case 1:
                     pr++;
@@ -54,9 +54,21 @@ public class TrabalhoRPG {
                     PrintarInfo(pers, perso);
                     break;
                 case 3:
+                    per = 0;
+                    System.out.println("Com qual personagem deseja batalhar?");
+                    PrintarListPerso(pr, perso);
+                    do{
+                        per = ler.nextInt();
+                        if(per < 0 || per > pr){
+                            System.out.println("Valor inválido. Digite novamente.");
+                        }
+                    } while (per < 0 || per > pr);
+                    int inic = perso.get(per).get(0).getDest();
+                    int id = perso.get(per).get(0).getIdClasse();
+                    b.batalha(inic, perso, per, id);
                     break;
                 case 4:
-                    int per = 0;
+                    per = 0;
                     System.out.println("De qual personagem deseja adicionar o  novo armamento?");
                     PrintarListPerso(pr, perso);
                     do {
@@ -144,24 +156,24 @@ public class TrabalhoRPG {
         switch (resp) {
             case 1:
                 classe = "Guerreiro";
-                Guerreiro G = new Guerreiro(NomeP, lvl, classe, descPer, idd);
-                perso.add(new ArrayList());
-                perso.get(p).add(G);
                 idClasse = 1;
+                Guerreiro G = new Guerreiro(NomeP, lvl, classe, descPer, idd, idClasse);
+                perso.add(new ArrayList());
+                perso.get(p).add(G);                
                 break;
             case 2:
                 classe = "Arqueiro";
-                Arqueiro Arq = new Arqueiro(NomeP, lvl, classe, descPer, idd);
-                perso.add(new ArrayList());
-                perso.get(p).add(Arq);
                 idClasse = 2;
+                Arqueiro Arq = new Arqueiro(NomeP, lvl, classe, descPer, idd, idClasse);
+                perso.add(new ArrayList());
+                perso.get(p).add(Arq);                
                 break;
             case 3:
                 classe = "Mago";
-                Mago M = new Mago(NomeP, lvl, classe, descPer, idd);
-                perso.add(new ArrayList());
-                perso.get(p).add(M);
                 idClasse = 3;
+                Mago M = new Mago(NomeP, lvl, classe, descPer, idd, idClasse);
+                perso.add(new ArrayList());
+                perso.get(p).add(M);                
                 break;
         }
         // posição Habilidade --> 0:1

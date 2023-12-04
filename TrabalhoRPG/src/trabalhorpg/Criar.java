@@ -8,7 +8,7 @@ public abstract class Criar {
 
     protected String nomePer, descPer, tipo, nomeHab, descHab, NomeArm, MaxF = "", MaxV = "", MaxD = "", MaxP = "";
     protected int Forc = 1, Vit = 1, Dest = 1, Pod = 1, pontos = 6, dano, peso, def, podMin, lvl = 0, lvl2 = 0, resp,
-            limF, limV, limD, limP, iddPer, idArm;
+            limF, limV, limD, limP, iddPer, idArm, idClasse;
     protected String classe;
     protected Scanner l = new Scanner(System.in);
     protected boolean primaria;
@@ -19,6 +19,10 @@ public abstract class Criar {
     public String getNomePer() {
         return nomePer;
     }
+
+    public int getIdClasse() {
+        return idClasse;
+    }    
 
     public String getDescPer() {
         return descPer;
