@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TrabalhoRPG {
-    // ArrayList<ArrayList<Criar>> pm = new ArrayList();
 
     public static void main(String[] args) {
         int pr, resp, respM = 0, per = 0;
@@ -57,15 +56,20 @@ public class TrabalhoRPG {
                     per = 0;
                     System.out.println("Com qual personagem deseja batalhar?");
                     PrintarListPerso(pr, perso);
-                    do{
+                    do {
                         per = ler.nextInt();
-                        if(per < 0 || per > pr){
+                        if (per < 0 || per > pr) {
                             System.out.println("Valor inválido. Digite novamente.");
                         }
                     } while (per < 0 || per > pr);
                     int inic = perso.get(per).get(0).getDest();
                     int id = perso.get(per).get(0).getIdClasse();
-                    b.batalha(inic, perso, per, id);
+                    int xp = 0;
+                    // váriavel xp receberá o resultado da batalha
+                    xp = b.batalha(inic, perso, per, id);
+                    // criar if para caso xp seja 0, só para não precisar realizar nada
+                    // caso maior que 0, realizar somatória do xp e adicionar ao personagem, se
+                    // precisar, crie um método para xp
                     break;
                 case 4:
                     per = 0;
@@ -96,9 +100,9 @@ public class TrabalhoRPG {
                 case 5:
                     System.out.println("De qual personagem deseja alterar os atributos?");
                     PrintarListPerso(pr, perso);
-                    do{
+                    do {
                         resp = ler.nextInt();
-                        if(resp < 0 || resp > pr){
+                        if (resp < 0 || resp > pr) {
                             System.out.println("Valor inválido! Digite novamente");
                         }
                     } while (resp < 0 || resp > pr);
@@ -114,7 +118,7 @@ public class TrabalhoRPG {
 
     public static ArrayList<ArrayList<Criar>> CiarPersonagem(int p, ArrayList<ArrayList<Criar>> perso) {
         Scanner ler = new Scanner(System.in);
-        Arma c = new Arma(0, 0, 0, false, null, null,0);
+        Arma c = new Arma(0, 0, 0, false, null, null, 0);
         int resp, idClasse = 0, lvl = 0, idd;
         String NomeP = "", classe = "", nomeH, descH, descPer;
 
@@ -140,13 +144,13 @@ public class TrabalhoRPG {
             }
         } while (lvl < 0 || lvl > 30);
         System.out.println("Qual é a idade do seu personagem?");
-        do{
+        do {
             idd = ler.nextInt();
-            if(idd < 0){
+            if (idd < 0) {
                 System.out.println("A idade não pode possuir um valor negativo!");
-            } else if(idd > 100){
+            } else if (idd > 100) {
                 System.out.println("Seu personagem não pode ser tão velho!");
-            } else if (idd < 18){
+            } else if (idd < 18) {
                 System.out.println("Seu personagem não pode ser muito jovem!");
             }
         } while (idd < 0 || idd > 100 || idd < 18);
@@ -159,21 +163,21 @@ public class TrabalhoRPG {
                 idClasse = 1;
                 Guerreiro G = new Guerreiro(NomeP, lvl, classe, descPer, idd, idClasse);
                 perso.add(new ArrayList());
-                perso.get(p).add(G);                
+                perso.get(p).add(G);
                 break;
             case 2:
                 classe = "Arqueiro";
                 idClasse = 2;
                 Arqueiro Arq = new Arqueiro(NomeP, lvl, classe, descPer, idd, idClasse);
                 perso.add(new ArrayList());
-                perso.get(p).add(Arq);                
+                perso.get(p).add(Arq);
                 break;
             case 3:
                 classe = "Mago";
                 idClasse = 3;
                 Mago M = new Mago(NomeP, lvl, classe, descPer, idd, idClasse);
                 perso.add(new ArrayList());
-                perso.get(p).add(M);                
+                perso.get(p).add(M);
                 break;
         }
         // posição Habilidade --> 0:1
@@ -217,17 +221,17 @@ public class TrabalhoRPG {
         perso.get(p).add(Arm);
         return perso;
     }
-    
+
     public static void Atrib(int p, ArrayList<ArrayList<Criar>> perso) {
         perso.get(p).get(0).PreencherAtributos(perso, p);
     }
 
-    public static void PrintarListPerso(int pr, ArrayList<ArrayList<Criar>> perso){
+    public static void PrintarListPerso(int pr, ArrayList<ArrayList<Criar>> perso) {
         for (int i = 0; i <= pr; i++) {
-                        System.out.println(i + " - "
-                                + perso.get(i).get(0).getNomePer() + " --> "
-                                + perso.get(i).get(0).getClasse());
-                    }
+            System.out.println(i + " - "
+                    + perso.get(i).get(0).getNomePer() + " --> "
+                    + perso.get(i).get(0).getClasse());
+        }
     }
 
     public static void PrintarInfo(int p, ArrayList<ArrayList<Criar>> perso) {

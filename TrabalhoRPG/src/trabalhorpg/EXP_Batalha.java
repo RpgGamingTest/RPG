@@ -28,14 +28,14 @@ public class EXP_Batalha {
 
     /*
      * Posições
-     * Personagem e atributos: (0,1)
-     * Habilidade: (0,2)
-     * Armas primárias e secundárias: (0,3)
+     * Personagem e atributos: (0,0)
+     * Habilidade: (0,1)
+     * Armas primárias e secundárias: (0,2) e (0,3)
      */
-    public void batalha(int iniciativa, ArrayList<ArrayList<Criar>> perso, int per, int idClass) {
+    public int batalha(int iniciativa, ArrayList<ArrayList<Criar>> perso, int per, int idClass) {
 
-        int hpPer = 0, hpadd = 0, ord = 0, turno = -1, resp = 0, cont = 0, cont2 = 0, forcadd = 0, dano = 0, dado = 0,
-                danoIn = 0, lim = 0, defEsc = 0;
+        int hpPer = 0, hpadd = 0, ord = 0, resp = 0, cont = 0, cont2 = 0, forcadd = 0, dano = 0, dado = 0,
+                danoIn = 0, defEsc = 0, xp = 0;
         boolean HabAtiv = false, queim = false;
         /* Definir HP do personagem */
         Scanner ler = new Scanner(System.in);
@@ -52,11 +52,12 @@ public class EXP_Batalha {
         }
         /* Criar inimigos */
         ArrayList<Inimigo> inimigo = new ArrayList();
-        inimigo.add(new Inimigo(1, 700, 6, 20, "Goblin"));
+        inimigo.add(new Inimigo(1, 500, 6, 20, "Goblin"));
         inimigo.add(new Inimigo(10, 650, 14, 10, "Lobo"));
         inimigo.add(new Inimigo(15, 1100, 16, 36, "Gnol"));
+        inimigo.add(new Inimigo(20, 1500, 21, 39, "Orc"));
         /* Inimigo sortido */
-        int in = R.nextInt(3);
+        int in = R.nextInt(4);
         /* Definir iniciativas */
         int inicInmig = rolar(20) + inimigo.get(in).getIniciativa();
         int inicPer = rolar(20) + iniciativa;
@@ -79,33 +80,6 @@ public class EXP_Batalha {
             System.out.println("|\tStatus do Personagem\n| HP: " + hpPer
                     + "\n| Nome: " + perso.get(per).get(0).getNomePer());
             System.out.println("+=============================================+");
-            /* Contador de turnos, de habilidade e de tempo de uso para habilidade */
-            turno++;
-            dano = 0;
-            if (cont > 0 && lim == 0) {
-                cont--;
-                lim = 1;
-            } else if (cont == 0 && lim == 1) {
-                /* Quando chegar a 0, redefine os status dos personagens */
-                switch (idClass) {
-                    case 1:
-                        hpPer -= hpadd;
-                        dano -= forcadd;
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        queim = false;
-                        break;
-                }
-                lim = 0;
-            }
-            if (cont2 > 0) {
-                cont2--;
-
-            } else if (cont2 == 0) {
-                HabAtiv = false;
-            }
             /* Selecionar a vez de quem irá atacar */
             switch (ord) {
                 /* Personagem */
@@ -136,7 +110,7 @@ public class EXP_Batalha {
                                     /* Acerto */
                                     hpInim -= dano = (perso.get(per).get(2).getDano() * 3)
                                             + (perso.get(per).get(0).getForc() * 3) - inimigo.get(in).getDefesa();
-                                    System.out.println("Você deu tirou " + dano + " de hp do seu inimigo!");
+                                    System.out.println("Você tirou " + dano + " de hp do seu inimigo!");
                                 } else if (dado < 10) {
                                     /* Erro */
                                     System.out.println(
@@ -175,7 +149,7 @@ public class EXP_Batalha {
                                     /* Acerto */
                                     hpInim -= dano = (perso.get(per).get(3).getDano() * 3)
                                             + (perso.get(per).get(0).getForc() * 3) - inimigo.get(in).getDefesa();
-                                    System.out.println("Você deu tirou " + dano + " de hp do seu inimigo!");
+                                    System.out.println("Você tirou " + dano + " de hp do seu inimigo!");
                                 } else if (dado < 10) {
                                     /* Erro */
                                     System.out.println(
@@ -225,21 +199,25 @@ public class EXP_Batalha {
                                                 int arm = 0;
                                                 boolean armp = false, arms = false;
                                                 /* Ativa dano crítico */
-                                                if(perso.get(per).get(2).getIdArm() == 4 || perso.get(per).get(2).getIdArm() == 3){
+                                                if (perso.get(per).get(2).getIdArm() == 4
+                                                        || perso.get(per).get(2).getIdArm() == 3) {
                                                     armp = true;
                                                 }
-                                                if (perso.get(per).get(3).getIdArm() == 4 || perso.get(per).get(3).getIdArm() == 3){
+                                                if (perso.get(per).get(3).getIdArm() == 4
+                                                        || perso.get(per).get(3).getIdArm() == 3) {
                                                     arms = true;
                                                 }
-                                                if (armp == arms){
-                                                    if(perso.get(per).get(2).getDano() > perso.get(per).get(3).getDano()){
+                                                if (armp == arms) {
+                                                    if (perso.get(per).get(2).getDano() > perso.get(per).get(3)
+                                                            .getDano()) {
                                                         arm = 2;
-                                                    } else if (perso.get(per).get(2).getDano() < perso.get(per).get(3).getDano()){
+                                                    } else if (perso.get(per).get(2).getDano() < perso.get(per).get(3)
+                                                            .getDano()) {
                                                         arm = 3;
                                                     }
-                                                } else if (armp){
+                                                } else if (armp) {
                                                     arm = 2;
-                                                } else if (arms){
+                                                } else if (arms) {
                                                     arm = 3;
                                                 }
                                                 dano = ((perso.get(per).get(arm).getDano() * 6)
@@ -259,17 +237,15 @@ public class EXP_Batalha {
                                             break;
                                         case 3:
                                             HabAtiv = true;
-                                            int DanBola = perso.get(per).get(0).getPod() * 50;/*
-                                                                                               * Define o dano da bola
-                                                                                               * de fogo
-                                                                                               */
+                                            int DanBola = perso.get(per).get(0).getPod() * 45;
+                                            /* Define o dano da bola de fogo */
                                             System.out.println("Você usou a bola de fogo! Você tirou " + DanBola
                                                     + " de vida do seu inimigo!");
                                             hpInim -= DanBola;
-                                            int chan = rolar(100);
-                                            if (chan > 30 || chan < 60) {
+                                            int chan = rolar(101);
+                                            if (chan >= 35 || chan <= 50) {
                                                 /*
-                                                 * Define chance de 70:30 para deixar o inimigo queimando
+                                                 * Define chance de 85:15 para deixar o inimigo queimando
                                                  * chance de deixar em chamas: 30%
                                                  */
                                                 System.out.println(
@@ -332,11 +308,48 @@ public class EXP_Batalha {
                     } else if (dado < 10) {
                         System.out.println("Seu inimigo errou o ataque! Aproveite para revidar!");
                     }
+                    if (queim == true) {
+                        hpInim -= 30;
+                        System.out.println("Seu inimigo está em chamas! Ele perdeu 30 de HP");
+                    }
                     ord = 1;
                     defEsc = 0;
+                    if (cont > 0) {
+                        cont--;
+                    }
+                    /* Contador de habilidade e de tempo de uso para habilidade */
+                    if (cont == 0) {
+                        /* Quando chegar a 0, redefine os status dos personagens */
+                        switch (idClass) {
+                            case 1:
+                                hpPer -= hpadd;
+                                dano -= forcadd;
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                queim = false;
+                                break;
+                        }
+                    }
+                    if (cont2 > 0) {
+                        cont2--;
+
+                    } else if (cont2 == 0) {
+                        HabAtiv = false;
+                    }
                     break;
-            }
+            }            
+            dano = 0;
+        }
+        if(hpInim == 0){
+            //Criar if para caso o personagem já esteja no nível 30
+            //xp random
+            System.out.println("Você acabou com seu inimigo no campo de BATALHA!"
+                    + " Você irá receber " /*Tanto de xp*/ + " de XP pela sua vitória!");
+            return xp;
+        } else {
+            return 0;
         }
     }
-
 }
