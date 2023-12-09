@@ -64,10 +64,25 @@ public class TrabalhoRPG {
                     } while (per < 0 || per > pr);
                     int inic = perso.get(per).get(0).getDest();
                     int id = perso.get(per).get(0).getIdClasse();
-                    int xp = 0;
+                    int xp = 0, nec2=0;
                     // váriavel xp receberá o resultado da batalha
                     xp = b.batalha(inic, perso, per, id);
                     // criar if para caso xp seja 0, só para não precisar realizar nada
+                    int nec = ((perso.get(per).get(0).getLvl()+1)*1000);
+                    if(xp>0){
+                        nec2=xp+perso.get(per).get(0).getXp();
+                        if(nec2>(nec+perso.get(per).get(0).getXp())){
+                            nec2-=nec;
+                            perso.get(per).get(0).setXp(nec2);
+                            perso.get(per).get(0).setPontos(1);
+                            System.out.println("Você ganhou mais um ponto de atributos! ");
+                        }else{
+                            System.out.println("Você está com "+(perso.get(per).get(0).getXp()+xp)+" de XP!");
+                            perso.get(per).get(0).setXp(perso.get(per).get(0).getXp()+xp);
+                            
+                        }
+                        
+                    }
                     // caso maior que 0, realizar somatória do xp e adicionar ao personagem, se
                     // precisar, crie um método para xp
                     break;
@@ -241,7 +256,8 @@ public class TrabalhoRPG {
                 + "\n| NÍVEL: " + perso.get(p).get(0).getLvl()
                 + "\n| IDADE: " + perso.get(p).get(0).getIddPer()
                 + "\n| DESCRIÇÃO: " + perso.get(p).get(0).getDescPer()
-                + "\n| PONTOS: " + perso.get(p).get(0).getPontos());
+                + "\n| PONTOS: " + perso.get(p).get(0).getPontos()
+                + "\n| XP: "+ perso.get(p).get(0).getXp());
         System.out.println("+----------------------------------------+");
         System.out.println("|\tAtributos\n| FORÇA: " + perso.get(0).get(0).getForc()
                 + "\n| DESTREZA: " + perso.get(p).get(0).getDest()

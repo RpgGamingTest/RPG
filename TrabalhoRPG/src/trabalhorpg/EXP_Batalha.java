@@ -342,12 +342,18 @@ public class EXP_Batalha {
             }            
             dano = 0;
         }
-        if(hpInim == 0){
+        if(hpInim <= 0){
             //Criar if para caso o personagem já esteja no nível 30
-            //xp random
-            System.out.println("Você acabou com seu inimigo no campo de BATALHA!"
-                    + " Você irá receber " /*Tanto de xp*/ + " de XP pela sua vitória!");
+            if(perso.get(per).get(0).getLvl()==30){
+                System.out.println("O personagem chegou ao nivel máximo!");
+                return 0;
+            }
+            else{
+                xp = batalhar();
+                System.out.println("Você acabou com seu inimigo no campo de BATALHA!"
+                    + " Você irá receber " + xp + " de XP pela sua vitória!");
             return xp;
+            }
         } else {
             return 0;
         }

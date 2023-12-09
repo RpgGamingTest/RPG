@@ -8,7 +8,7 @@ public abstract class Criar {
 
     protected String nomePer, descPer, tipo, nomeHab, descHab, NomeArm, MaxF = "", MaxV = "", MaxD = "", MaxP = "";
     protected int Forc = 1, Vit = 1, Dest = 1, Pod = 1, pontos = 6, dano, peso, def, podMin, lvl = 0, lvl2 = 0, resp,
-            limF, limV, limD, limP, iddPer, idArm, idClasse;
+            limF, limV, limD, limP, iddPer, idArm, idClasse, xp;
     protected String classe;
     protected Scanner l = new Scanner(System.in);
     protected boolean primaria;
@@ -18,6 +18,10 @@ public abstract class Criar {
 
     public String getNomePer() {
         return nomePer;
+    }
+
+    public int getXp() {
+        return xp;
     }
 
     public int getIdClasse() {
@@ -102,8 +106,15 @@ public abstract class Criar {
 
     public int getIdArm() {
         return idArm;
+    }  
+
+    public void setPontos(int pontos) {
+        this.pontos += pontos;
     }
-    
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
 
     public void PreencherAtributos(ArrayList<ArrayList<Criar>> perso, int p) {
         int resp = 0, resp2 = 0;

@@ -11,5 +11,6 @@ public class Personagem extends Criar{
         this.iddPer = idd;
         this.idClasse = idClasse;
         pontos += lvl2;
+        this.xp=((lvl * (lvl + 1)) / 2)*1000;
     }  
 }
