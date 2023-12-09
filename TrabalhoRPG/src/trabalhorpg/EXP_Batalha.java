@@ -14,14 +14,6 @@ public class EXP_Batalha {
         return XP;
     }
 
-    /*
-     * nivel 1 1000
-     * nivel 2 2000+1000
-     * nivel 3 3000+3000
-     * nivel 4 4000+6000
-     * nivel 5 5000+10000
-     * 
-     */
     public int rolar(int nl) {
         return R.nextInt(nl) + 1;
     }
@@ -52,12 +44,14 @@ public class EXP_Batalha {
         }
         /* Criar inimigos */
         ArrayList<Inimigo> inimigo = new ArrayList();
+        inimigo.add(new Inimigo(0, 100, 2, 0, "Zumbi"));
+        inimigo.add(new Inimigo(0, 150, 3, 10, "Escorpião gigante"));
         inimigo.add(new Inimigo(1, 500, 6, 20, "Goblin"));
         inimigo.add(new Inimigo(10, 650, 14, 10, "Lobo"));
         inimigo.add(new Inimigo(15, 1100, 16, 36, "Gnol"));
         inimigo.add(new Inimigo(20, 1500, 21, 39, "Orc"));
         /* Inimigo sortido */
-        int in = R.nextInt(4);
+        int in = R.nextInt(6);
         /* Definir iniciativas */
         int inicInmig = rolar(20) + inimigo.get(in).getIniciativa();
         int inicPer = rolar(20) + iniciativa;
@@ -339,22 +333,27 @@ public class EXP_Batalha {
                         HabAtiv = false;
                     }
                     break;
-            }            
+            }
             dano = 0;
         }
-        if(hpInim <= 0){
-            //Criar if para caso o personagem já esteja no nível 30
-            if(perso.get(per).get(0).getLvl()==30){
-                System.out.println("O personagem chegou ao nivel máximo!");
+        if (hpInim <= 0) {
+            System.out.println("=====================================================");
+            System.out.println("PARABÉNS! Você finalizou seu inmigo!");
+            if (perso.get(per).get(0).getLvl() == 30) {
+                System.out.println("O personagem Está no nível máximo ao nivel máximo!");
+                System.out.println("=====================================================");
                 return 0;
-            }
-            else{
+            } else {
                 xp = batalhar();
                 System.out.println("Você acabou com seu inimigo no campo de BATALHA!"
-                    + " Você irá receber " + xp + " de XP pela sua vitória!");
-            return xp;
+                        + " Você irá receber " + xp + " de XP pela sua vitória!");
+                System.out.println("=====================================================");
+                return xp;
             }
         } else {
+            System.out.println("=====================================================");
+            System.out.println("Que pena! Você foi derrotado em batalha.");
+            System.out.println("=====================================================");
             return 0;
         }
     }

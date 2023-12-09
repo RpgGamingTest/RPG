@@ -26,7 +26,7 @@ public abstract class Criar {
 
     public int getIdClasse() {
         return idClasse;
-    }    
+    }
 
     public String getDescPer() {
         return descPer;
@@ -106,14 +106,18 @@ public abstract class Criar {
 
     public int getIdArm() {
         return idArm;
-    }  
+    }
 
     public void setPontos(int pontos) {
         this.pontos += pontos;
     }
 
     public void setXp(int xp) {
-        this.xp = xp;
+        this.xp += xp;
+    }    
+
+    public void setLvl(int lvl) {
+        this.lvl += lvl;
     }
 
     public void PreencherAtributos(ArrayList<ArrayList<Criar>> perso, int p) {
@@ -217,7 +221,7 @@ public abstract class Criar {
             dano = r.nextInt();
             if (dano < 1) {
                 System.out.println("Sua arma deve conter dano MAIOR que 0. Digite novamente!");
-            } else if(dano > 100){
+            } else if (dano > 100) {
                 System.out.println("Sua arma deve conter um dano MENOR que 100. Digite novamente!");
             }
         } while (dano < 1 || dano > 100);
